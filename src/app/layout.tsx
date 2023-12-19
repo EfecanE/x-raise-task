@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Jura } from 'next/font/google'
 import './globals.css'
+import Navbar from './components/Navbar'
+import StoreProvider from './StoreProvider'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Jura({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,8 +17,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <StoreProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <nav className="w-full p-2 border-b border-slate-400">
+            <Navbar />
+          </nav>
+          <main className="flex min-h-screen flex-col items-center gap-3 p-12">
+            {children}
+          </main>
+        </body>
+      </html>
+    </StoreProvider>
   )
 }
